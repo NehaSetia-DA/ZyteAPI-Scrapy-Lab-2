@@ -27,7 +27,7 @@ Based on the official [Zyte Web Scraping Tutorial](https://docs.zyte.com/web-scr
 
 ### 1. Clone and Navigate to Project
 ```bash
-git clone <repository-url>
+git clone https://github.com/NehaSetia-DA/ZyteAPI-Scrapy-Lab-2.git
 cd Scrapy-ZyteAPI-TrainingLab-2
 ```
 
@@ -72,10 +72,23 @@ zyteapi_solution
 ## 🎪 The Core Demo: See the Transformation
 
 ### Problem: Traditional Spider Fails
-```bash
-cd scrapy-lab-tutorial
-scrapy crawl traditional
-```
+
+**First, disable Zyte API to see traditional Scrapy fail:**
+
+1. **Comment out Zyte API in `settings.py`:**
+   ```python
+   # Comment these lines to disable Zyte API
+   # ADDONS = {
+   #     "scrapy_zyte_api.Addon": 500,
+   # }
+   # ZYTE_API_KEY = "your_actual_api_key_here"
+   ```
+
+2. **Run the traditional spider:**
+   ```bash
+   cd scrapy-lab-tutorial
+   scrapy crawl traditional
+   ```
 
 **Expected Output:**
 ```
@@ -87,9 +100,22 @@ scrapy crawl traditional
 **Why it fails**: The page `https://quotes.toscrape.com/js/` uses JavaScript to load content. Traditional Scrapy only gets the initial HTML, not the JavaScript-rendered content.
 
 ### Solution: Zyte API Spider Succeeds
-```bash
-scrapy crawl zyteapi_solution
-```
+
+**Now, enable Zyte API to see the transformation:**
+
+1. **Uncomment Zyte API in `settings.py`:**
+   ```python
+   # Uncomment these lines to enable Zyte API
+   ADDONS = {
+       "scrapy_zyte_api.Addon": 500,
+   }
+   ZYTE_API_KEY = "your_actual_api_key_here"  # Add your real API key
+   ```
+
+2. **Run the Zyte API solution spider:**
+   ```bash
+   scrapy crawl zyteapi_solution
+   ```
 
 **Expected Output:**
 ```
@@ -99,6 +125,10 @@ scrapy crawl zyteapi_solution
 ```
 
 **Why it works**: Zyte API renders the JavaScript and returns the fully loaded page to Scrapy.
+
+### 🔄 **Quick Toggle for Demo:**
+- **Traditional mode**: Comment out `ADDONS` and `ZYTE_API_KEY` in settings.py
+- **Zyte API mode**: Uncomment `ADDONS` and `ZYTE_API_KEY` in settings.py
 
 ---
 
@@ -315,6 +345,15 @@ pip install scrapy-zyte-api
 cd scrapy-lab-tutorial
 scrapy list  # Should show available spiders
 ```
+
+**5. "Traditional spider is working but should fail"**
+- Make sure Zyte API is **commented out** in `settings.py` for the traditional demo
+- The traditional spider should fail on JavaScript pages when Zyte API is disabled
+
+**6. "Zyte API spider not working"**
+- Make sure Zyte API is **uncommented** in `settings.py`
+- Verify your API key is correct and has credits
+- Check that `browserHtml: True` is set in the spider's meta
 
 ---
 

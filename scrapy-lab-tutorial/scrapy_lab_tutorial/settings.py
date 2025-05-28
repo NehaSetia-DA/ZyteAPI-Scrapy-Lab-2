@@ -95,8 +95,17 @@ FEED_EXPORT_ENCODING = "utf-8"
 
 """
 🔧 ZYTE API CONFIGURATION
+
+📋 WORKSHOP DEMO INSTRUCTIONS:
+- For TRADITIONAL SPIDER demo → COMMENT OUT the lines below
+- For ZYTE API SPIDER demo → UNCOMMENT the lines below
+
+🔄 Quick Toggle:
+- Traditional mode: Comment out ADDONS and ZYTE_API_KEY
+- Zyte API mode: Uncomment ADDONS and ZYTE_API_KEY
 """
-# The addon enables transparent mode by default.
+
+# 🌐 ENABLE ZYTE API (Uncomment these lines for Zyte API demo)
 ADDONS = {
     "scrapy_zyte_api.Addon": 500,
 }
@@ -106,4 +115,12 @@ ADDONS = {
 ZYTE_API_KEY = "your_zyte_api_key_here"  # ← Replace with your actual API key
 
 # Example: ZYTE_API_KEY = "1234567890abcdef1234567890abcdef"
+
+# 📝 FOR TRADITIONAL SPIDER DEMO:
+# Comment out the ADDONS and ZYTE_API_KEY lines above like this:
+# 
+# # ADDONS = {
+# #     "scrapy_zyte_api.Addon": 500,
+# # }
+# # ZYTE_API_KEY = "your_zyte_api_key_here"
 
